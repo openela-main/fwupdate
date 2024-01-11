@@ -1,0 +1,25 @@
+From b75c3c6b2f6d50ea0054b5238e3cb00a31886fa9 Mon Sep 17 00:00:00 2001
+From: Xiami <1927254+Xiami2012@users.noreply.github.com>
+Date: Tue, 10 Apr 2018 18:31:49 +0800
+Subject: [PATCH] Fix dependency chain for a parallel make issue
+
+See GitHub Issue #105
+---
+ linux/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/linux/Makefile b/linux/Makefile
+index 3c5f4908856..a2868114f67 100644
+--- a/linux/Makefile
++++ b/linux/Makefile
+@@ -60,6 +60,7 @@ include-dir :
+ 		$(INSTALL) -d -m 755 include ; \
+ 	fi
+ 
++fwupdate.c : | include/fwup.h
+ libfwup.c : | include/fwup.h
+ include/fwup.h : | include/fwup-version.h
+ include/fwup-version.h : | include-dir
+-- 
+2.20.1
+
